@@ -5,10 +5,27 @@ the Karnataka and Western Ghats region, India. Built as a final-year capstone
 project at BMS College of Engineering, Department of Information Science
 and Engineering.
 
-**Team (Batch 42):** Pratham Manoj Patil (1BM23IS180), Praveen Kumar Y
-(1BM23IS181), Raviteja S (1BM23IS193), Rishikesh Bulagouda (1BM23IS198)
-**Guide:** Dr. Sreelatha R, Associate Professor, Dept. of ISE
+## Application Screenshots
 
+### 1. Command Center
+<p align="center">
+  <img src="screenshots/01-command-center.png" width="100%" alt="Forest Fire Digital Twin Command Center">
+</p>
+
+### 2. Regional Risk Map
+<p align="center">
+  <img src="screenshots/02-regional-risk-map.png" width="100%" alt="Regional Forest Fire Risk Map">
+</p>
+
+### 3. What-If Simulator
+<p align="center">
+  <img src="screenshots/03-what-if-simulator.png" width="100%" alt="Forest Fire What-If Simulator">
+</p>
+
+### 4. Spread Simulation
+<p align="center">
+  <img src="screenshots/04-spread-simulation.png" width="100%" alt="Cellular Automata Forest Fire Spread Simulation">
+</p>
 ## What it does
 
 Ingests live satellite fire detections (NASA FIRMS) and weather data
