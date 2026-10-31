@@ -1,115 +1,222 @@
-# Digital Twin Framework for Forest Fire Prediction
+# 🔥 Digital Twin Framework for Forest Fire Prediction
 
-A digital twin system for wildfire risk prediction and spread simulation over
-the Karnataka and Western Ghats region, India. Built as a final-year capstone
-project at BMS College of Engineering, Department of Information Science
-and Engineering.
+> A digital twin for wildfire risk prediction and spread simulation over **Karnataka, the Western Ghats and other fire-prone Indian states**. Final-year capstone project, Dept. of Information Science & Engineering, **BMS College of Engineering (2026)**.
 
-## Application Screenshots
-
-### 1. Command Center
 <p align="center">
-  <img src="screenshots/01-command-center.png" width="100%" alt="Forest Fire Digital Twin Command Center">
+  <img src="screenshots/01-command-center.png" width="100%" alt="Command Center">
 </p>
 
-### 2. Regional Risk Map
+---
+## 🚀 Live Demo
+
 <p align="center">
-  <img src="screenshots/02-regional-risk-map.png" width="100%" alt="Regional Forest Fire Risk Map">
+  <a href="https://forest-fire-twin.streamlit.app/Spread_Simulation">
+    <img src="https://img.shields.io/badge/LAUNCH-LIVE%20APPLICATION-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Launch Live Application">
+  </a>
 </p>
 
-### 3. What-If Simulator
 <p align="center">
-  <img src="screenshots/03-what-if-simulator.png" width="100%" alt="Forest Fire What-If Simulator">
+  <a href="https://forest-fire-twin.streamlit.app/Spread_Simulation">
+    https://forest-fire-twin.streamlit.app/Spread_Simulation
+  </a>
 </p>
 
-### 4. Spread Simulation
-<p align="center">
-  <img src="screenshots/04-spread-simulation.png" width="100%" alt="Cellular Automata Forest Fire Spread Simulation">
-</p>
-## What it does
+**Explore the application modules:**
+- Command Center – Regional forest fire monitoring.
+- What-If Simulator – Hypothetical fire scenario modelling.
+- Spread Simulation – Cellular Automata-based fire propagation.
+- Historical Time Machine – Historical fire detection analysis.
+- Model Insights – Machine learning model insights.
 
-Ingests live satellite fire detections (NASA FIRMS) and weather data
-(OpenWeatherMap / Meteostat for history), computes the full Canadian Forest
-Fire Weather Index system (FFMC/DMC/DC/BUI/FWI), adds each zone's recent
-satellite fire history and long-run fire climatology, scores wildfire risk per
-grid zone using three ML models (Random Forest, XGBoost, CNN+LSTM) trained on
-3 real fire seasons of satellite-confirmed detections, projects 2-hour fire
-spread with a Cellular Automata simulator seeded from high-risk zones, and
-visualises all of it on a live, authenticated, multi-region Streamlit dashboard.
+## 📌 Project at a Glance
 
-### Model results (held-out 2025 season, never seen in training)
+| Item | Details |
+|---|---|
+| **Problem** | Wildfires are detected late and spread unpredictably; raw accuracy hides poor fire detection (only ~4% of zone-days burn) |
+| **Solution** | Live data ingestion → FWI computation → ML risk scoring → Cellular Automata spread simulation → authenticated dashboard |
+| **Coverage** | Karnataka / Western Ghats (0.1° grid, validated) + 8 more states (0.5° grid) |
+| **Data used** | 3 real fire seasons of satellite-confirmed detections; 2025 season held out for testing |
+| **Users** | Admin (user management, history, alerts) and Viewer (full read access) |
+| **Status** | Academic project, working end-to-end (offline demo mode available) |
 
-| Model | AUC-ROC | Avg precision | **Alert:** accuracy / fires caught | **Early warning:** accuracy / fires caught |
+---
+
+## 🖼️ Screenshots
+
+| Regional Risk Map | What-If Simulator | Spread Simulation |
+|---|---|---|
+| <img src="screenshots/02-regional-risk-map.png" width="100%"> | <img src="screenshots/03-what-if-simulator.png" width="100%"> | <img src="screenshots/04-spread-simulation.png" width="100%"> |
+
+---
+
+## ✨ Key Features
+
+| # | Feature | Description |
+|---|---|---|
+| 1 | **Live data ingestion** | NASA FIRMS fire detections + OpenWeatherMap weather (Meteostat for history) |
+| 2 | **Fire Weather Index** | Full Canadian FWI system: FFMC, DMC, DC, BUI, FWI |
+| 3 | **ML risk scoring** | Random Forest, XGBoost, CNN+LSTM per grid zone |
+| 4 | **Fire-history features** | Previous-10-day fire activity, 5×5 neighbourhood activity, leave-one-season-out climatology |
+| 5 | **Spread simulation** | Rate-of-spread Cellular Automaton (Canadian FBP equations) with slope, wind, fuel and DEM terrain |
+| 6 | **What-If simulator** | Custom weather, ignition points, forest preset or any searched place, 1 min – 4 h duration |
+| 7 | **Land-cover awareness** | OpenStreetMap-based fuel / non-fuel masks (water, roads, buildings, bare rock) |
+| 8 | **3D map playback** | Google Maps WebGL overlay: flames, smoke, embers, ash, burn scar |
+| 9 | **Alerts** | Email on *new* EXTREME zones only; opt-in emergency alerts via email / SMS (admin) |
+| 10 | **Reports** | PDF / DOCX / printable simulation report, CSV + GeoJSON export |
+| 11 | **Live Activity Log** | Every refresh, alert, simulation, sign-in and admin change (5 s updates) |
+| 12 | **Background scheduler** | Refreshes data without the dashboard open (cron-like) |
+| 13 | **Auth + roles** | Login-gated dashboard, admin / viewer roles |
+| 14 | **Honest data status** | Feeds labelled `LIVE`, `CACHED`, `UNAVAILABLE`, `NOT CONFIGURED`, `DEMO`; synthetic data never shown as live |
+
+---
+
+## 🧰 Tech Stack & Tools
+
+| Category | Technology | Used For |
+|---|---|---|
+| **Language** | Python 3.11 | Entire pipeline (TensorFlow needs ≤3.11) |
+| **Dashboard** | Streamlit | Multi-page web UI, dark theme |
+| **ML (classical)** | scikit-learn, XGBoost | Random Forest, XGBoost models |
+| **ML (deep)** | TensorFlow / Keras | CNN+LSTM model |
+| **Data** | pandas, NumPy | Feature engineering, grids, zone-days |
+| **Simulation** | Custom Cellular Automaton | 2-hour regional and local spread |
+| **Database** | MySQL 8 (SQLAlchemy + PyMySQL), SQLite fallback | Snapshots, alerts, users, activity log |
+| **Maps** | Google Maps JavaScript API, Geocoding / Places API | Satellite map, search, 3D view |
+| **Satellite data** | NASA FIRMS (VIIRS_SNPP_NRT) | Active fire detections |
+| **Weather** | OpenWeatherMap, Meteostat | Live and historical weather |
+| **Terrain** | Open-Topo-Data / Open-Meteo DEM | Slope for spread model |
+| **Land cover** | OpenStreetMap (Overpass API) | Fuel / non-fuel classification |
+| **Notifications** | SMTP (Gmail), Twilio | Email and SMS alerts |
+| **Reports** | ReportLab, python-docx, Matplotlib | PDF / DOCX reports |
+| **Testing** | pytest | Pipeline, leakage, storage, auth tests |
+| **Deployment** | Streamlit Community Cloud | Hosting |
+| **Config / Secrets** | `.env`, `.streamlit/config.toml` | Keys and theme |
+
+---
+
+## 🏗️ Architecture
+
+| Layer | Responsibility | Location |
+|---|---|---|
+| 1. Data Acquisition | FIRMS + weather clients, grid builder | `src/data_ingestion/` |
+| 2. Data Processing | Canadian FWI system | `src/data_processing/` |
+| 3. ML Prediction | Models, risk tiers, model routing | `src/ml_models/` |
+| 4. CA Simulation | Spread simulator, ROS model, ignition check | `src/simulation/` |
+| 5. Digital Twin + UI | Twin state, alert engine, dashboard | `src/digital_twin/`, `src/dashboard/` |
+| Persistence | MySQL / SQLite storage | `src/storage/database.py` |
+| Notifications | Email alerts on new EXTREME zones | `src/notifications/email_notifier.py` |
+| Scheduling | Background refresh loop | `src/scheduler/scheduler.py` |
+| Auth | Login + role gating | `src/auth/auth_gate.py` |
+| Regions | Indian fire-prone state presets | `src/regions.py` |
+
+**Data flow:** `FIRMS + Weather → FWI → Fire-history features → ML models → Risk tiers → Digital Twin → CA Simulation → Dashboard / Alerts / Reports`
+
+---
+
+## 📊 Model Results (held-out 2025 season, never seen in training)
+
+| Model | AUC-ROC | Avg Precision | Alert: Accuracy / Fires Caught | Early Warning: Accuracy / Fires Caught |
 |---|---|---|---|---|
 | Random Forest | 0.863 | 0.243 | 92.3% / 41% | 78.3% / 77% |
-| XGBoost | 0.870 | 0.259 | 91.2% / 48% | 74.6% / 84% |
-| CNN+LSTM | 0.862 | 0.263 | 91.4% / 49% | 74.6% / 82% |
-| XGBoost (v1, weather only) | 0.807 | 0.143 | 92.4% / 22% | 71.9% / 75% |
+| **XGBoost** | **0.870** | 0.259 | 91.2% / 48% | 74.6% / **84%** |
+| CNN+LSTM | 0.862 | **0.263** | 91.4% / **49%** | 74.6% / 82% |
+| XGBoost v1 (weather only) | 0.807 | 0.143 | 92.4% / 22% | 71.9% / 75% |
 
-Both operating points use thresholds chosen on training data only (alert: lowest threshold with ≥92% validation accuracy; early warning: ~80% validation recall).
+> Thresholds were chosen on training data only. *Alert* = lowest threshold with ≥92% validation accuracy. *Early Warning* = ~80% validation recall.
 
-The v2 features (previous-10-day satellite fire history, 5x5 neighbourhood
-activity, leave-one-season-out zone climatology) are computed by one shared
-module (`src/ml_models/fire_history.py`) for both training and live
-inference, and a test asserts the two paths produce identical values.
-Labels exclude FIRMS "static land source" detections (steel plants and kilns
-in the Ballari belt were ~10% of all detections); the live feed is cleaned
-the same way with a learned mask of those locations.
+### Alert Tiers (anchored to measured hit rates)
 
-Raw accuracy is not the target metric: only ~4% of zone-days burn, so
-predicting "no fire" everywhere scores 95.6% accuracy while catching nothing, and the weather-only v1 model reaches 92.4% at its alert threshold while catching only 22% of fires.
-Ranking quality (AUC-ROC, average precision) and recall at a fixed alert
-budget are what matter, and the dashboard's alert tiers are anchored to
-measured hit rates (`src/ml_models/risk_index.py`):
-
-| Tier | Zone-days flagged | Fires captured | Hit rate (base rate 4.3%) |
+| Tier | Zone-days Flagged | Fires Captured | Hit Rate (base rate 4.3%) |
 |---|---|---|---|
-| EXTREME | 1.3% | 12.6% | 43.2% |
-| HIGH or above | 8.7% | 48.4% | 24.2% |
-| MODERATE or above | 28.3% | 83.5% | 12.8% |
+| 🔴 EXTREME | 1.3% | 12.6% | 43.2% |
+| 🟠 HIGH or above | 8.7% | 48.4% | 24.2% |
+| 🟡 MODERATE or above | 28.3% | 83.5% | 12.8% |
 
-Beyond the core prediction pipeline, the system also:
-- **Persists every refresh** (snapshots, alerts, users, activity) to
-  **MySQL** via SQLAlchemy when `DATABASE_URL` is set, with a zero-setup
-  SQLite fallback for local development (`src/storage/database.py`).
-- **Shows a live Activity Log**: every refresh (with per-stage latency),
-  new EXTREME detection, alert email, simulation, scenario, report download,
-  sign-in and admin change, newest first, updating every 5 seconds.
-- **Emails new EXTREME-risk detections** the moment they first appear, not
-  on every repeat refresh (`src/notifications/email_notifier.py`).
-- **Refreshes on a schedule independent of the dashboard being open**, via a
-  standalone background process (`src/scheduler/scheduler.py`) - the same
-  role a cron job or Windows Task Scheduler entry would play.
-- **Covers India's fire-prone states**: Karnataka/Western Ghats (0.1° grid,
-  validated) plus Uttarakhand, Himachal Pradesh, Odisha, Chhattisgarh, Madhya
-  Pradesh, Maharashtra, Andhra Pradesh/Telangana and Assam (0.5° grid), served
-  by a pooled pan-India model once `scripts/build_india_regions_dataset.py
-  --train` has been run, with metrics reported per state.
-- **Gates access behind login**, with an admin role (user management,
-  raw snapshot/alert history, notification setup) and a viewer role (full
-  read access to every prediction/simulation page).
+---
 
-## Architecture
+## 🎯 Impact & Benefits
 
-```
-Layer 1: Data Acquisition     -> src/data_ingestion/
-Layer 2: Data Processing      -> src/data_processing/
-Layer 3: ML Prediction        -> src/ml_models/
-Layer 4: CA Spread Simulation -> src/simulation/
-Layer 5: Digital Twin + UI    -> src/digital_twin/, src/dashboard/
+| Area | Impact / Benefit | Evidence |
+|---|---|---|
+| **Detection quality** | v2 fire-history features lifted fires caught at alert threshold from 22% to 48% | XGBoost v1 vs v2 table |
+| **Ranking quality** | AUC-ROC improved from 0.807 to 0.870 | Held-out 2025 season |
+| **Alert reliability** | EXTREME tier hits 43.2% of the time (~10× the 4.3% base rate) | Alert tier table |
+| **Early warning** | Up to 84% of fires caught at the early-warning operating point | XGBoost |
+| **Resource targeting** | Top 8.7% of zone-days captures 48.4% of fires | Alert tier table |
+| **Train / serve consistency** | One shared feature module for training and live inference, verified by a test | `fire_history.py` + tests |
+| **Data integrity** | Static heat sources (steel plants, kilns, ~10% of detections) removed from labels and live feed | Learned static mask |
+| **Always-on monitoring** | Scheduler refreshes and emails alerts with no dashboard open | `scheduler.py` |
+| **No alert spam** | Email only when a zone *first* becomes EXTREME | `email_notifier.py` |
+| **Planning tool** | What-If simulator lets officials test weather and ignition scenarios | What-If + Spread pages |
+| **Transparency** | Every feed is labelled honestly; simulated output is always marked SIMULATED | Status badges |
+| **Accountability** | Full audit trail of users, alerts and simulations | Activity Log, Admin page |
+| **Accessibility** | Runs fully offline with synthetic data, no API keys needed | Demo mode |
 
-Supporting services:
-Persistence   -> src/storage/database.py        (MySQL/SQLite: snapshots, alerts, users, activity_log)
-Notifications -> src/notifications/email_notifier.py
-Scheduling    -> src/scheduler/scheduler.py      (background refresh loop)
-Auth          -> src/auth/auth_gate.py           (login + role gating for the dashboard)
-Regions       -> src/regions.py                  (curated Indian fire-prone states)
-Model routing -> src/ml_models/model_registry.py (which model serves which region)
-```
+> **Why not raw accuracy?** Predicting "no fire" everywhere scores 95.6% accuracy while catching nothing. AUC-ROC, average precision and recall at a fixed alert budget are the real metrics.
 
-## Setup
+---
 
-Requires Python 3.11 (TensorFlow does not yet support 3.12+).
+## 🗺️ Regions Covered
+
+| Region | Grid | Validation |
+|---|---|---|
+| Karnataka / Western Ghats | 0.1° | Validated on held-out season |
+| Uttarakhand, Himachal Pradesh, Odisha, Chhattisgarh, Madhya Pradesh, Maharashtra, Andhra Pradesh / Telangana, Assam | 0.5° | Per-state metrics after running `build_india_regions_dataset.py --train` (pooled pan-India model) |
+| Custom lat/lon box | – | Never validated |
+
+---
+
+## 🔥 Fire Spread Simulation
+
+| Aspect | Details |
+|---|---|
+| **Model** | Rate-of-spread CA (`ros`, default) using Canadian FBP equations; original probability CA still available (`legacy`) |
+| **Spread inputs** | FFMC, wind, BUI, slope (DEM), NDVI fuel continuity, ±25% fuel variability |
+| **Neighbourhood** | 24 nearest neighbours with true-distance correction |
+| **Cell size** | 5 / 10 / **25** / 50 m |
+| **Duration** | 1 min – 4 h, always computed in full |
+| **Domain** | Auto, Local 1 km, Small 2 km, Medium 5 km, Large 10 km, Custom (max 2–15 km) |
+| **Ignition check** | Rejects roads, buildings, water, bare ground; accepts mapped vegetation |
+| **Study region** | Bandipur Tiger Reserve boundary (official file if provided, else labelled approximate) |
+| **Playback** | Play / pause / reset, 0.5×–5×, layer toggles, camera presets (browser-side) |
+| **Exports** | CSV (every step), GeoJSON (burned cells), PDF / DOCX report |
+
+### Fuel / Non-fuel Land Cover (OpenStreetMap)
+
+| Class | OSM Features | Fire Behaviour |
+|---|---|---|
+| WATER | `natural=water`, rivers, canals, reservoirs | Never ignites or spreads into |
+| BUILT | buildings, residential / industrial / commercial | Never ignites or spreads into |
+| ROAD | paved highways, railways | Never ignites or spreads into |
+| NON_FUEL | bare rock, scree, sand, quarries, runways | Never ignites or spreads into |
+| FUEL | everything else | Unchanged |
+
+---
+
+## 📡 Data Sources & Status Labels
+
+| Source | Data | Scope |
+|---|---|---|
+| NASA FIRMS | VIIRS_SNPP_NRT detections | Region: last 10 days · Location: 25×25 km box, last 2 days |
+| OpenWeatherMap | Current weather | Region weather grid + selected location |
+| Meteostat | Historical weather | Model training |
+| Open-Topo-Data / Open-Meteo | DEM (~90 m lattice) | Slope for spread model |
+| OpenStreetMap (Overpass) | Land cover, ignition checks | Simulation domain |
+| Google Maps | Satellite map, geocoding | UI |
+
+| Status | Meaning |
+|---|---|
+| `LIVE` | Real data just delivered |
+| `CACHED` | Request failed; last real response shown with timestamp |
+| `UNAVAILABLE` | No data shown, nothing invented |
+| `NOT CONFIGURED` | API key missing |
+| `DEMO` | Synthetic data |
+
+---
+
+## 🚀 Setup
+
+**Requires Python 3.11** (TensorFlow does not yet support 3.12+).
 
 ```bash
 git clone https://github.com/Pratham0712/digital-twin-forest-fire.git
@@ -117,308 +224,151 @@ cd digital-twin-forest-fire
 python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # macOS/Linux
-pip install -r requirements.txt          # dashboard + scheduler (what deployment uses)
-pip install -r requirements-train.txt    # only if you will retrain models / run the tests
+pip install -r requirements.txt          # dashboard + scheduler (deployment)
+pip install -r requirements-train.txt    # only for retraining / tests
+pip install reportlab python-docx matplotlib   # reports
 ```
 
-### API keys (optional)
+### Environment Variables (`.env`, copy from `.env.example`)
 
-The system runs fully in offline/demo mode with synthetic data if no keys
-are set. For real data:
-
-1. Copy `.env.example` to `.env`
-2. NASA FIRMS: free key at https://firms.modaps.eosdis.nasa.gov/api/
-3. OpenWeatherMap: free key at https://home.openweathermap.org/api_keys
-   (activation can take up to 2 hours after signup)
-
-```
-FIRMS_MAP_KEY=your_key_here
-OWM_API_KEY=your_key_here
-GOOGLE_MAPS_API_KEY=your_key_here   # Spread Simulation satellite map (Maps JavaScript API)
-GOOGLE_MAPS_MAP_ID=                 # optional vector Map ID for 3D tilt / rotation
-```
-
-### What-If -> Spread Simulation
-
-Google Cloud APIs for the key in `GOOGLE_MAPS_API_KEY`: **Maps JavaScript API** (map) and, for the
-location search, **Geocoding API** or **Places API (New)** (either one; Geocoding is tried first).
-
-1. **What-If Simulator**
-   * Weather scenario: temperature, humidity, wind speed, wind direction (the bearing the wind blows
-     FROM), seeded hotspots, or a preset.
-   * Simulation set-up: a preset forest (Bandipur, Nagarhole, Kudremukh, highest-risk zone) or any place
-     found with the Google search box on the map; width x height (100-3000 m) or an area (0.25-5 km²);
-     cell size (5 / 10 / **25** / 50 m); simulated duration (1 min - 4 h); ignition (upwind edge, centre,
-     downwind edge, or points clicked on the map); grid / boundary visibility.
-   * The map shows the focus area as a box you can drag and resize (values snap to whole cells and
-     update when you release), the 25 m grid, the simulation domain (dashed) and the ignition.
-   * **Apply Scenario & Open Spread Simulation** transfers all of it.
-2. **Spread Simulation**
-   * **Run Simulation** runs the project's `FireSpreadSimulator` on the *simulation domain*: the focus
-     area plus a margin of (CA steps + 1) cells on every side. The CA moves fire at most one cell per
-     step, so the fire is limited only by the simulated duration (or fuel), never by the drawn box.
-   * Conditions: FFMC / BUI / NDVI of the regional grid zone, the scenario wind, a real DEM sampled on a
-     ~90 m lattice (Open-Topo-Data / Open-Meteo, cached in `models/focus_terrain/dem_lattice.csv`).
-   * The map plays the result with fire-front flames, merged wind-driven smoke plumes, embers, ash and
-     a burn scar. Play / pause / reset / 1x-2x-5x, the simulation-time slider, layer toggles and
-     camera presets run in the browser (no Streamlit reruns).
-   * Analytics, CSV export of every step and GeoJSON export of the simulated burned cells.
-   * The original regional 2-hour projection is kept in an expander.
-
-### Real data: NASA FIRMS, OpenWeatherMap, Google Maps
-
-Keys are read from `.env` (names in `.env.example`; `.env` is git-ignored and never printed). With
-keys set, the sidebar's *Offline / demo mode* is off by default and the real APIs are used:
-
-* **Regional twin** (all pages): NASA FIRMS `VIIRS_SNPP_NRT` detections for the region (last 10
-  days, used by the model's fire-history features) and OpenWeatherMap current weather on the
-  region's weather grid, refreshed at the auto-refresh interval or with *Refresh satellite & weather
-  data* (Command Center) / *Refresh data* (sidebar).
-* **Selected location** (What-If and Spread Simulation): OpenWeatherMap current weather at the focus
-  latitude/longitude and NASA FIRMS detections in a 25 × 25 km box around it (last 2 days), cached
-  10 / 15 minutes per place, with *Refresh weather* / *Refresh FIRMS* buttons. Shown as
-  **REAL WEATHER** and **NASA FIRMS** cards next to the **SCENARIO INPUT** card; the What-If values
-  drive the simulation, the real values are displayed, never mixed.
-* **Honest status**: each feed reports what it actually delivered: `LIVE`, `CACHED` (request failed,
-  last real response shown with its timestamp), `UNAVAILABLE` (no data shown, nothing invented),
-  `NOT CONFIGURED` or `DEMO`. The ticker, page badges and the Command Center *Data & system status*
-  use these; synthetic data is never labelled LIVE. API keys never appear in logs or messages.
-* **Maps**: the Command Center regional risk map, the What-If set-up map and the Spread Simulation map
-  are the same Google satellite component. Risk zones are drawn as semi-transparent model
-  predictions; NASA FIRMS detections are cyan circles (observed); simulated fire is drawn as
-  flames / burn scar; demo hotspots are purple and labelled synthetic.
-
-### Fuel / non-fuel land cover
-
-Fire spreads only through fuel. Before each run the simulation domain is classified from
-**OpenStreetMap** (Overpass API; cached in `models/land_cover/`), never from the colours of the
-satellite image:
-
-| Class | OSM features | Fire |
+| Variable | Purpose | Required |
 |---|---|---|
-| WATER | `natural=water`, `water=*`, `waterway=river/canal/riverbank`, reservoirs | never ignites, never spreads into it |
-| BUILT | `building=*`, residential / industrial / commercial land | never ignites, never spreads into it |
-| ROAD | paved highway classes, railways (centre line buffered by a typical width) | never ignites, never spreads into it |
-| NON_FUEL | bare rock, scree, sand, quarries, runways | never ignites, never spreads into it |
-| FUEL | everything else | unchanged behaviour |
+| `FIRMS_MAP_KEY` | NASA FIRMS ([get key](https://firms.modaps.eosdis.nasa.gov/api/)) | Optional |
+| `OWM_API_KEY` | OpenWeatherMap ([get key](https://home.openweathermap.org/api_keys)), activation up to 2 h | Optional |
+| `GOOGLE_MAPS_API_KEY` | Maps JavaScript API + Geocoding / Places API | Optional |
+| `GOOGLE_MAPS_MAP_ID` | Vector Map ID for 3D tilt / rotation | Optional |
+| `DATABASE_URL` | `mysql+pymysql://USER:PASSWORD@HOST:PORT/DBNAME` (SQLite if unset) | Optional |
+| `DATABASE_SSL` / `DATABASE_SSL_CA` | TLS for MySQL host | Optional |
+| `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD` | Email alerts | Optional |
+| `ALERT_RECIPIENT_EMAILS` | Alert recipients | Optional |
+| `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER` | SMS alerts | Optional |
+| `ALERT_PROVIDER_MODE=mock` | Test alerts without sending | Optional |
+| `DEFAULT_ADMIN_USERNAME`, `DEFAULT_ADMIN_PASSWORD` | Set before first run | Optional |
 
-The classes are added to the CA's existing `NON_FUEL` state (the algorithm is unchanged; cells
-are 8-neighbour, line features are rasterised 4-connected so a road cannot be crossed
-diagonally; there is no ember spotting). Forest tracks, footpaths and seasonal streams are not
-treated as barriers. Ignition cells that fall on non-fuel are not lit (the page says how many).
-When OpenStreetMap cannot be reached, every cell is fuel and the page shows a warning. The map's
-**Land cover** layer shows the excluded cells.
+> With no keys, the system runs fully in **offline / demo mode** with synthetic data.
 
-### 3D view
+### Default Login
 
-* The 3D view needs a **vector map ID**: Google Cloud Console → Google Maps Platform → Map
-  management → Create map ID (type *JavaScript*, *Vector*, tick *Tilt* and *Rotation*), then
-  `GOOGLE_MAPS_MAP_ID=<id>` in `.env`. Without it the map falls back to `DEMO_MAP_ID`; if that is
-  not rendered as a vector map, the view stays top-down and the map says so.
-* **Ctrl + left-drag** rotates (left/right) and tilts (up/down); Google's own Shift + drag also works.
-* On a vector map every effect is projected through Google's `WebGLOverlayView` camera (the
-  same matrix the map uses for that frame), so fire, smoke, embers, ash, burn scar, grid and
-  boundary stay on their latitude/longitude while the camera moves. Google's JS vector map draws
-  the satellite imagery on a flat ground plane, so effects sit at that ground (+0.4 m for the
-  flame base); the DEM is used by the fire model (slope), not for vertical placement.
+| Username | Password |
+|---|---|
+| `admin` | `changeme123` |
 
-### Interface
+⚠️ Change the password from the Admin page after first sign-in.
 
-* **Global ticker** (`src/dashboard/ui/global_ticker.py`) on every signed-in page: region, risk level,
-  alert zones, regional mean wind, last refresh, latest spread run (labelled SIMULATED) and whether the
-  FIRMS / OpenWeatherMap feeds are LIVE or DEMO. With no state loaded it says "DEMO / OFFLINE MODE".
-* **Command Center**: hero artwork (`src/dashboard/static/dashboard_hero.jpg`, served as a static file; an illustrative concept
-  image, captioned as such; its painted numbers are not data), live status strip, wildfire alert panel
-  (latest spread run, or the model's highest-risk zone, always labelled), key metrics, Explore modules,
-  data / system status.
-* **Sidebar**: the active page's button uses the blue → purple → pink gradient (from the first paint);
-  no other element uses it.
-* **Login**: glass card over a blurred copy of the hero artwork. "Create account" explains that accounts
-  are issued by an admin on the Admin page; there is no self-registration.
-* Streamlit's dark theme is set in `.streamlit/config.toml` so built-in widgets match.
+---
 
-### MySQL (optional - SQLite is used when unset)
+## ▶️ Running
 
-Any MySQL 8 host works (Railway, Aiven, TiDB Cloud free tiers, or local):
+| Task | Command |
+|---|---|
+| Full pipeline (one shot) | `python main.py` |
+| Pipeline with retraining | `python main.py --train` |
+| Build Karnataka dataset | `python src/ml_models/build_real_dataset.py` |
+| Train models | `python src/ml_models/train_real.py` |
+| Build all-India data + train | `python scripts/build_india_regions_dataset.py --train` (needs `FIRMS_MAP_KEY`, ~1–2 h first time, resumable) |
+| **Launch dashboard** | `streamlit run src/dashboard/app.py` |
+| Scheduler (forever) | `python -m src.scheduler.scheduler` |
+| Scheduler (single cycle, for cron / Task Scheduler) | `python -m src.scheduler.scheduler --once` |
+| Migrate SQLite → MySQL | `python scripts/migrate_sqlite_to_mysql.py` |
+| Run tests | `pytest tests/ -v` |
+| Benchmarks | `python scripts/benchmark_phase3.py` · `python scripts/benchmark_ui_offline.py` |
 
-```
-DATABASE_URL=mysql+pymysql://USER:PASSWORD@HOST:PORT/DBNAME
-DATABASE_SSL=true                 # if the host requires TLS
-# DATABASE_SSL_CA=path/to/ca.pem  # verified TLS, if the host gives a CA file
-```
+---
 
-Tables are created automatically on first run. To copy existing local data
-across once: `python scripts/migrate_sqlite_to_mysql.py`.
+## 🖥️ Dashboard Pages
 
-### Email alerts + default login (optional)
+| Page | Purpose | Access |
+|---|---|---|
+| Command Center | Status strip, alert panel, key metrics, regional risk map | All |
+| What-If Simulator | Scenario weather, location, ignition setup | All |
+| Spread Simulation | Run and play the fire spread | All |
+| History | Past snapshots | All |
+| Briefing | Summary view | All |
+| Insights | Model and data insights | All |
+| Admin | Users, raw history, notification setup, emergency alert audit | Admin |
+| Activity Log | Live feed of all system / user actions | All |
 
-Add to `.env` (see `.env.example` for the full list):
+---
 
-```
-SMTP_HOST=smtp.gmail.com
-SMTP_USER=your_email@gmail.com
-SMTP_PASSWORD=your_gmail_app_password
-ALERT_RECIPIENT_EMAILS=someone@example.com
-```
+## 🔔 Reports & Emergency Alerts
 
-Without these, the system still detects and logs new EXTREME zones in the
-database, it just won't email anyone. The dashboard itself is always
-login-gated: on first run it creates a default account, **admin /
-changeme123** - sign in and change the password from the Admin page (or set
-`DEFAULT_ADMIN_USERNAME`/`DEFAULT_ADMIN_PASSWORD` in `.env` before first run).
+| Capability | Details |
+|---|---|
+| **Report** | PDF / DOCX / printable view, report ID `FFDT-…`, built from the stored run snapshot |
+| **Emergency alert** | Admin only, opt-in: review dialog → recipients (enabled, verified channels) → explicit confirmation |
+| **Safety wording** | What-If alerts always state *"SIMULATION ONLY — hypothetical scenario, not confirmation of an active fire."* |
+| **Audit** | Every attempt logged (Admin → Emergency alerts) |
+| **Statuses** | Provider's own (accepted / queued / failed / not configured / mock), never "delivered" without confirmation |
 
-## Running it
+---
 
-```bash
-# Full pipeline, one shot, prints a summary
-python main.py
-
-# Full pipeline, retraining models first
-python main.py --train
-
-# Rebuild the Karnataka training set from the raw FIRMS/Meteostat files,
-# then train the 3 ML models + the weather-only baseline
-python src/ml_models/build_real_dataset.py
-python src/ml_models/train_real.py
-
-# Download + build the other Indian states and train the pan-India model
-# (needs FIRMS_MAP_KEY; ~1-2 h first time, cached and resumable after)
-python scripts/build_india_regions_dataset.py --train
-
-# Interactive dashboard (login required - default admin/changeme123)
-streamlit run src/dashboard/app.py
-
-# Background refresh scheduler - keeps the database/alerts current and
-# emails new detections even when nobody has the dashboard open
-python -m src.scheduler.scheduler                  # runs forever, ~cron-like
-python -m src.scheduler.scheduler --once           # single cycle (use this
-                                                    # from cron / Windows
-                                                    # Task Scheduler instead)
-
-# Run the test suite (pipeline, features/leakage, storage/auth/notifications)
-pytest tests/ -v
-```
-
-## Local simulation: fire model, domain, ignition check, study region
-
-* **Fire model (default `local_ca_model = "ros"`).** A rate-of-spread cellular automaton
-  (`src/simulation/fire_behaviour.py`, `src/simulation/ros_ca.py`). The spread RATE comes from the Canadian
-  FBP System equations: FFMC (so temperature and humidity) and wind give the Initial Spread Index, a blended
-  FBP D-1 / O-1a fuel gives the head-fire ROS, BUI the build-up effect, and the fire ellipse gives flank and
-  backing rates. Each burning cell offers its 24 nearest neighbours (true distances, so diagonals are
-  geometrically corrected) an arrival time; slope, fuel continuity (NDVI) and ±25 % simulated fuel
-  variability modify it. The fuel blend and residence times are ASSUMPTIONS, not calibrated for Bandipur:
-  the output is a physically consistent what-if, not an operational forecast. The original probability CA
-  is still available with `model="legacy"`.
-* **Time.** The selected simulated duration is always computed in full (internal sub-steps keep fast fires
-  accurate; ~60 frames are stored). Playback is separate: 1× shows about one simulated minute per second;
-  0.5× / 2× / 5× change only the playback, never the result. If the fire goes out, the run still covers
-  the whole duration and says when it went out.
-* **Simulation domain.** Configurable before a run: Auto (focus + duration margin), Local 1 km, Small 2 km,
-  Medium 5 km, Large 10 km or Custom, plus a maximum extent (2 to 15 km). The dashed amber box on the map is
-  the domain; the solid blue box is the focus area. Ignitions can be placed anywhere inside the domain. The
-  domain still grows before the fire reaches its edge, up to the maximum extent; the run says so if that
-  limit is reached.
-* **Hypothetical ignition check.** A clicked point is checked against mapped OpenStreetMap features around
-  that point (`src/simulation/ignition_site.py`; a small cached tile per click, nothing is fetched while
-  the box is dragged). Roads, buildings / built-up areas, water and bare ground are rejected; mapped
-  vegetation is accepted; anything else is LOCATION UNVERIFIED (accepted with a warning). This check only
-  decides where an ignition may be placed, never how the fire spreads.
-* **Bandipur default.** The preset opens on a forest interior (11.6560 N, 76.5800 E, west of the
-  Gundlupet-Ooty road; chosen from Google satellite imagery), not on the Bandipur campus / NH 766 roadside.
-* **Study region.** Bandipur Tiger Reserve boundary from `data/study_region/` (OFFICIAL file when provided,
-  otherwise the labelled APPROXIMATE extent); fire crossing it continues into the REGIONAL EXTENSION with
-  separate statistics.
-* **Benchmarks (offline).** `python scripts/benchmark_phase3.py` (run path, both models, domain presets) and
-  `python scripts/benchmark_ui_offline.py` (app start and page reruns, demo data, network disabled).
-* **Optional research module.** `src/landcover/` (ESA WorldCover + OSM + Sentinel-2 fusion) and
-  `scripts/verify_landcover_sources.py` are kept for analysis; they are not part of the simulation path.
-
-## Reports and emergency alerts
-
-* After every completed simulation: **Download / Print Simulation Report** (PDF, DOCX, printable view; built from
-  the stored snapshot of that run, report ID `FFDT-…`) and **Send Emergency Alert** (admin only).
-* Alerts are opt-in: review dialog → recipients (enabled, verified channels only) → explicit confirmation. WHAT-IF
-  alerts always say *"SIMULATION ONLY — This is a hypothetical forest-fire scenario, not confirmation of an active
-  fire."* Every attempt is audited (Admin → Emergency alerts). Statuses are the provider's (accepted / queued /
-  failed / not configured / mock) - never "delivered" without confirmation.
-* Configure in `.env`: `SMTP_*` (email), `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER` (SMS),
-  `ALERT_PROVIDER_MODE=mock` to test without sending. Signed-in users get an in-app alarm (sidebar) with
-  acknowledge / mute / test; email and SMS cannot play a custom sound on a recipient's phone.
-* Extra packages: `pip install reportlab python-docx matplotlib`.
-
-## Project structure
+## 📁 Project Structure
 
 ```
-config/config.py                       Central configuration (region, thresholds, API endpoints)
-src/data_ingestion/
-    firms_client.py                    NASA FIRMS satellite hotspot API client
-    weather_client.py                  OpenWeatherMap client
-    ingestion_module.py                Grid builder + spatial nearest-neighbor join
-src/data_processing/
-    feature_engineering.py             Canadian FWI System (FFMC/DMC/DC/BUI/FWI)
-src/ml_models/
-    model_trainer.py                   Random Forest, XGBoost, CNN+LSTM model classes
-    fire_history.py                    v2 features: fire history, climatology, static-source mask
-    risk_index.py                      Probability -> validated alert tiers
-    model_registry.py                  Region -> model routing
-    build_real_dataset.py              Real FIRMS + Meteostat -> labelled zone-days (any region)
-    train_real.py                      Temporal-holdout training + comparison table
-    timeseries_builder.py              Synthetic trailing-history builder for CNN-LSTM
-    train.py                           Training pipeline + model comparison table
-src/simulation/
-    cellular_automata.py               8-neighbour CA wildfire spread simulator
-src/digital_twin/
-    twin_state.py                      DigitalTwin state manager + AlertEngine +
-                                        persist_snapshot_and_notify() hook
-src/storage/
-    database.py                        SQLAlchemy (MySQL/SQLite): snapshots, alerts_log, users, activity_log
-src/notifications/
-    email_notifier.py                  SMTP email alert on new EXTREME zones
-src/scheduler/
-    scheduler.py                       Standalone background refresh loop
-src/auth/
-    auth_gate.py                       Login form + admin/viewer role gating
-src/regions.py                         Curated Indian region presets
-src/dashboard/
-    app.py                             Streamlit dashboard (Command Center)
-    pages/1-5_*.py                     What-If, Spread Sim, History, Briefing, Insights
-    pages/6_Admin.py                   Admin-only: users, history, notification setup
-    pages/7_Activity_Log.py            Live feed of every system/user action
-scripts/
-    build_india_regions_dataset.py     Multi-state data download, build and training
-    migrate_sqlite_to_mysql.py         One-time copy of local SQLite data into MySQL
-tests/
-    test_pipeline.py                   Integration + regression tests
-    test_fire_history.py               Train/serve parity, leakage rules, India builder
-    test_storage_auth_notifications.py Storage/auth/notification/activity-log tests
-main.py                                Single entry point, runs the full pipeline
+config/config.py                    Central configuration
+main.py                             Single entry point for the full pipeline
+src/
+├── regions.py                      Indian region presets
+├── data_ingestion/                 firms_client, weather_client, ingestion_module
+├── data_processing/                feature_engineering (Canadian FWI)
+├── ml_models/                      model_trainer, fire_history, risk_index, model_registry,
+│                                   build_real_dataset, train_real, timeseries_builder, train
+├── simulation/                     cellular_automata, ros_ca, fire_behaviour, ignition_site
+├── digital_twin/                   twin_state (DigitalTwin + AlertEngine)
+├── storage/                        database (SQLAlchemy)
+├── notifications/                  email_notifier
+├── scheduler/                      scheduler
+├── auth/                           auth_gate
+├── landcover/                      Optional research module (WorldCover + OSM + Sentinel-2)
+└── dashboard/                      app.py, pages/1-5_*, 6_Admin, 7_Activity_Log, ui/, static/
+scripts/                            build_india_regions_dataset, migrate_sqlite_to_mysql, benchmarks
+tests/                              test_pipeline, test_fire_history, test_storage_auth_notifications
 ```
 
-## Known limitations
+---
 
-- The Karnataka model is validated on Karnataka data; the other states are
-  validated only after `build_india_regions_dataset.py --train` has run
-  (the sidebar shows each state's held-out AUC once it has). Custom lat/lon
-  boxes are never validated.
-- Real NDVI/fuel-moisture rasters are not ingested yet; the NDVI column shown
-  is a synthetic placeholder and is deliberately not a model input.
-- FWI moisture codes are computed per day from default previous-day values
-  rather than a full recursive carry-forward (station data has gaps).
-- CA spread uses real/synthetic elevation for slope but does not model
-  fire suppression, roads, or firebreaks.
-- The 25 m local spread (Spread Simulation map) uses the same CA with a
-  local-scale base spread probability (`SystemConfig.local_ca_base_spread_prob`
-  = 0.8; the regional CA keeps 0.35) and uniform fuel inside the 500 m area.
-  It is not yet validated against observed fire perimeters. Vegetation drawn
-  on the map is a procedural representation, not individual real trees.
-- Without `DATABASE_URL`, the scheduler and dashboard share one local
-  SQLite file; set `DATABASE_URL` for any multi-instance or cloud deployment.
+## ✅ Testing
 
-## Deployment
+| Test File | Covers |
+|---|---|
+| `test_pipeline.py` | Integration + regression |
+| `test_fire_history.py` | Train / serve feature parity, leakage rules, India builder |
+| `test_storage_auth_notifications.py` | Storage, auth, notifications, activity log |
 
-Deployed on Streamlit Community Cloud: [add your live URL here once deployed]
+---
 
-## License
+## ⚠️ Known Limitations
 
-Academic project - BMS College of Engineering, 2026.
+| Limitation | Detail |
+|---|---|
+| Validation scope | Only Karnataka validated by default; other states after running the India build; custom boxes never validated |
+| NDVI | Synthetic placeholder, deliberately not a model input; real NDVI / fuel-moisture rasters not yet ingested |
+| FWI codes | Computed per day from default previous-day values, not full recursive carry-forward (station gaps) |
+| Spread model | Fuel blend and residence times are assumptions, not calibrated for Bandipur; a physically consistent what-if, **not an operational forecast** |
+| Not modelled | Fire suppression, ember spotting, firebreaks; forest tracks, footpaths and seasonal streams not treated as barriers |
+| Perimeter validation | Local spread not yet validated against observed fire perimeters |
+| Vegetation visuals | Procedural, not real individual trees |
+| 3D view | Effects sit on a flat ground plane; DEM used for slope only |
+| Database | Without `DATABASE_URL`, scheduler and dashboard share one local SQLite file; use MySQL for multi-instance deployment |
+
+---
+
+## 🔮 Future Scope
+
+| Idea | Benefit |
+|---|---|
+| Real NDVI / fuel-moisture rasters | Better fuel modelling |
+| Recursive FWI carry-forward | More accurate moisture codes |
+| Calibration against observed fire perimeters | Operational-grade spread forecasts |
+| Firebreak, road and suppression modelling | More realistic scenarios |
+| Ember spotting | Long-range spread |
+
+---
+
+## 🚢 Deployment
+
+Deployed on Streamlit Community Cloud: **[add your live URL here]**
+
+## 📄 License
+
+Academic project, BMS College of Engineering, 2026.
