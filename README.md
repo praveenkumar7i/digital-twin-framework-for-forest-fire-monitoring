@@ -1,13 +1,20 @@
-# 🔥 Digital Twin Framework for Forest Fire Prediction
-
-> A digital twin for wildfire risk prediction and spread simulation over **Karnataka, the Western Ghats and other fire-prone Indian states**. Final-year capstone project, Dept. of Information Science & Engineering, **BMS College of Engineering (2026)**.
+<h1 align="center">🔥 Digital Twin Framework for Forest Fire Prediction 🌲</h1>
 
 <p align="center">
-  <img src="screenshots/01-command-center.png" width="100%" alt="Command Center">
+  Wildfire risk prediction and spread simulation for Karnataka, the Western Ghats and other fire-prone Indian states.<br>
+  Final-year capstone project, Dept. of Information Science &amp; Engineering, BMS College of Engineering (2026).
 </p>
 
----
-## 🚀 Live Demo
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/TensorFlow-CNN%2BLSTM-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow">
+  <img src="https://img.shields.io/badge/XGBoost-Model-189AB4?style=flat-square" alt="XGBoost">
+  <img src="https://img.shields.io/badge/scikit--learn-Random%20Forest-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Google%20Maps-API-4285F4?style=flat-square&logo=googlemaps&logoColor=white" alt="Google Maps">
+  <img src="https://img.shields.io/badge/NASA-FIRMS-0B3D91?style=flat-square&logo=nasa&logoColor=white" alt="NASA FIRMS">
+</p>
 
 <p align="center">
   <a href="https://forest-fire-twin.streamlit.app/Spread_Simulation">
@@ -16,36 +23,65 @@
 </p>
 
 <p align="center">
-  <a href="https://forest-fire-twin.streamlit.app/Spread_Simulation">
-    https://forest-fire-twin.streamlit.app/Spread_Simulation
-  </a>
+  <a href="https://forest-fire-twin.streamlit.app/Spread_Simulation">https://forest-fire-twin.streamlit.app/Spread_Simulation</a>
 </p>
 
-**Explore the application modules:**
-- Command Center – Regional forest fire monitoring.
-- What-If Simulator – Hypothetical fire scenario modelling.
-- Spread Simulation – Cellular Automata-based fire propagation.
-- Historical Time Machine – Historical fire detection analysis.
-- Model Insights – Machine learning model insights.
+---
+
+## 📸 Screenshots
+
+### 🛰️ Command Center
+Regional monitoring: status strip, alert panel, key metrics and live feed status.
+
+<p align="center">
+  <img src="screenshots/01-command-center.png" width="100%" alt="Command Center">
+</p>
+
+### 🗺️ Regional Risk Map
+Model-predicted risk per grid zone with NASA FIRMS detections overlaid on Google satellite imagery.
+
+<p align="center">
+  <img src="screenshots/02-regional-risk-map.png" width="100%" alt="Regional Risk Map">
+</p>
+
+### 🧪 What-If Simulator
+Set weather, location, ignition points and simulation domain for a hypothetical scenario.
+
+<p align="center">
+  <img src="screenshots/03-what-if-simulator.png" width="100%" alt="What-If Simulator">
+</p>
+
+### 🔥 Spread Simulation
+Cellular Automata fire propagation with flames, smoke, burn scar and playback controls.
+
+<p align="center">
+  <img src="screenshots/04-spread-simulation.png" width="100%" alt="Spread Simulation">
+</p>
+
+---
+
+## 🧭 Application Modules
+
+| Module | Purpose |
+|---|---|
+| Command Center | Regional forest fire monitoring |
+| What-If Simulator | Hypothetical fire scenario modelling |
+| Spread Simulation | Cellular Automata-based fire propagation |
+| Historical Time Machine | Historical fire detection analysis |
+| Model Insights | Machine learning model insights |
+
+---
 
 ## 📌 Project at a Glance
 
 | Item | Details |
 |---|---|
 | **Problem** | Wildfires are detected late and spread unpredictably; raw accuracy hides poor fire detection (only ~4% of zone-days burn) |
-| **Solution** | Live data ingestion → FWI computation → ML risk scoring → Cellular Automata spread simulation → authenticated dashboard |
+| **Solution** | Live data ingestion, FWI computation, ML risk scoring, Cellular Automata spread simulation, authenticated dashboard |
 | **Coverage** | Karnataka / Western Ghats (0.1° grid, validated) + 8 more states (0.5° grid) |
 | **Data used** | 3 real fire seasons of satellite-confirmed detections; 2025 season held out for testing |
 | **Users** | Admin (user management, history, alerts) and Viewer (full read access) |
 | **Status** | Academic project, working end-to-end (offline demo mode available) |
-
----
-
-## 🖼️ Screenshots
-
-| Regional Risk Map | What-If Simulator | Spread Simulation |
-|---|---|---|
-| <img src="screenshots/02-regional-risk-map.png" width="100%"> | <img src="screenshots/03-what-if-simulator.png" width="100%"> | <img src="screenshots/04-spread-simulation.png" width="100%"> |
 
 ---
 
@@ -58,7 +94,7 @@
 | 3 | **ML risk scoring** | Random Forest, XGBoost, CNN+LSTM per grid zone |
 | 4 | **Fire-history features** | Previous-10-day fire activity, 5×5 neighbourhood activity, leave-one-season-out climatology |
 | 5 | **Spread simulation** | Rate-of-spread Cellular Automaton (Canadian FBP equations) with slope, wind, fuel and DEM terrain |
-| 6 | **What-If simulator** | Custom weather, ignition points, forest preset or any searched place, 1 min – 4 h duration |
+| 6 | **What-If simulator** | Custom weather, ignition points, forest preset or any searched place, 1 min to 4 h duration |
 | 7 | **Land-cover awareness** | OpenStreetMap-based fuel / non-fuel masks (water, roads, buildings, bare rock) |
 | 8 | **3D map playback** | Google Maps WebGL overlay: flames, smoke, embers, ash, burn scar |
 | 9 | **Alerts** | Email on *new* EXTREME zones only; opt-in emergency alerts via email / SMS (admin) |
@@ -74,7 +110,7 @@
 
 | Category | Technology | Used For |
 |---|---|---|
-| **Language** | Python 3.11 | Entire pipeline (TensorFlow needs ≤3.11) |
+| **Language** | Python 3.11 | Entire pipeline (TensorFlow needs 3.11 or lower) |
 | **Dashboard** | Streamlit | Multi-page web UI, dark theme |
 | **ML (classical)** | scikit-learn, XGBoost | Random Forest, XGBoost models |
 | **ML (deep)** | TensorFlow / Keras | CNN+LSTM model |
@@ -113,7 +149,9 @@
 
 ---
 
-## 📊 Model Results (held-out 2025 season, never seen in training)
+## 🤖 Model Results
+
+Evaluated on the held-out 2025 season, never seen in training.
 
 | Model | AUC-ROC | Avg Precision | Alert: Accuracy / Fires Caught | Early Warning: Accuracy / Fires Caught |
 |---|---|---|---|---|
@@ -122,9 +160,11 @@
 | CNN+LSTM | 0.862 | **0.263** | 91.4% / **49%** | 74.6% / 82% |
 | XGBoost v1 (weather only) | 0.807 | 0.143 | 92.4% / 22% | 71.9% / 75% |
 
-> Thresholds were chosen on training data only. *Alert* = lowest threshold with ≥92% validation accuracy. *Early Warning* = ~80% validation recall.
+> Thresholds were chosen on training data only. *Alert* = lowest threshold with 92% or higher validation accuracy. *Early Warning* = ~80% validation recall.
 
-### Alert Tiers (anchored to measured hit rates)
+### 🚨 Alert Tiers
+
+Tiers are anchored to measured hit rates.
 
 | Tier | Zone-days Flagged | Fires Captured | Hit Rate (base rate 4.3%) |
 |---|---|---|---|
@@ -138,7 +178,7 @@
 
 | Area | Impact / Benefit | Evidence |
 |---|---|---|
-| **Detection quality** | v2 fire-history features lifted fires caught at alert threshold from 22% to 48% | XGBoost v1 vs v2 table |
+| **Detection quality** | v2 fire-history features lifted fires caught at alert threshold from 22% to 48% | XGBoost v1 vs v2 |
 | **Ranking quality** | AUC-ROC improved from 0.807 to 0.870 | Held-out 2025 season |
 | **Alert reliability** | EXTREME tier hits 43.2% of the time (~10× the 4.3% base rate) | Alert tier table |
 | **Early warning** | Up to 84% of fires caught at the early-warning operating point | XGBoost |
@@ -156,13 +196,13 @@
 
 ---
 
-## 🗺️ Regions Covered
+## 🌏 Regions Covered
 
 | Region | Grid | Validation |
 |---|---|---|
 | Karnataka / Western Ghats | 0.1° | Validated on held-out season |
 | Uttarakhand, Himachal Pradesh, Odisha, Chhattisgarh, Madhya Pradesh, Maharashtra, Andhra Pradesh / Telangana, Assam | 0.5° | Per-state metrics after running `build_india_regions_dataset.py --train` (pooled pan-India model) |
-| Custom lat/lon box | – | Never validated |
+| Custom lat/lon box | n/a | Not validated |
 
 ---
 
@@ -174,14 +214,14 @@
 | **Spread inputs** | FFMC, wind, BUI, slope (DEM), NDVI fuel continuity, ±25% fuel variability |
 | **Neighbourhood** | 24 nearest neighbours with true-distance correction |
 | **Cell size** | 5 / 10 / **25** / 50 m |
-| **Duration** | 1 min – 4 h, always computed in full |
-| **Domain** | Auto, Local 1 km, Small 2 km, Medium 5 km, Large 10 km, Custom (max 2–15 km) |
+| **Duration** | 1 min to 4 h, always computed in full |
+| **Domain** | Auto, Local 1 km, Small 2 km, Medium 5 km, Large 10 km, Custom (max 2 to 15 km) |
 | **Ignition check** | Rejects roads, buildings, water, bare ground; accepts mapped vegetation |
 | **Study region** | Bandipur Tiger Reserve boundary (official file if provided, else labelled approximate) |
-| **Playback** | Play / pause / reset, 0.5×–5×, layer toggles, camera presets (browser-side) |
+| **Playback** | Play / pause / reset, 0.5× to 5×, layer toggles, camera presets (browser-side) |
 | **Exports** | CSV (every step), GeoJSON (burned cells), PDF / DOCX report |
 
-### Fuel / Non-fuel Land Cover (OpenStreetMap)
+### 🌿 Fuel / Non-fuel Land Cover (OpenStreetMap)
 
 | Class | OSM Features | Fire Behaviour |
 |---|---|---|
@@ -197,7 +237,7 @@
 
 | Source | Data | Scope |
 |---|---|---|
-| NASA FIRMS | VIIRS_SNPP_NRT detections | Region: last 10 days · Location: 25×25 km box, last 2 days |
+| NASA FIRMS | VIIRS_SNPP_NRT detections | Region: last 10 days. Location: 25×25 km box, last 2 days |
 | OpenWeatherMap | Current weather | Region weather grid + selected location |
 | Meteostat | Historical weather | Model training |
 | Open-Topo-Data / Open-Meteo | DEM (~90 m lattice) | Slope for spread model |
@@ -206,21 +246,21 @@
 
 | Status | Meaning |
 |---|---|
-| `LIVE` | Real data just delivered |
-| `CACHED` | Request failed; last real response shown with timestamp |
-| `UNAVAILABLE` | No data shown, nothing invented |
-| `NOT CONFIGURED` | API key missing |
-| `DEMO` | Synthetic data |
+| 🟢 `LIVE` | Real data just delivered |
+| 🟡 `CACHED` | Request failed; last real response shown with timestamp |
+| 🔴 `UNAVAILABLE` | No data shown, nothing invented |
+| ⚪ `NOT CONFIGURED` | API key missing |
+| 🟣 `DEMO` | Synthetic data |
 
 ---
 
-## 🚀 Setup
+## ⚙️ Setup
 
 **Requires Python 3.11** (TensorFlow does not yet support 3.12+).
 
 ```bash
-git clone https://github.com/Pratham0712/digital-twin-forest-fire.git
-cd digital-twin-forest-fire
+git clone https://github.com/praveenkumar7i/digital-twin-framework-for-forest-fire-monitoring.git
+cd digital-twin-framework-for-forest-fire-monitoring
 python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # macOS/Linux
@@ -229,7 +269,9 @@ pip install -r requirements-train.txt    # only for retraining / tests
 pip install reportlab python-docx matplotlib   # reports
 ```
 
-### Environment Variables (`.env`, copy from `.env.example`)
+### 🔑 Environment Variables
+
+Copy `.env.example` to `.env`.
 
 | Variable | Purpose | Required |
 |---|---|---|
@@ -247,13 +289,13 @@ pip install reportlab python-docx matplotlib   # reports
 
 > With no keys, the system runs fully in **offline / demo mode** with synthetic data.
 
-### Default Login
+### 🔐 Default Login
 
 | Username | Password |
 |---|---|
 | `admin` | `changeme123` |
 
-⚠️ Change the password from the Admin page after first sign-in.
+Change the password from the Admin page after first sign-in.
 
 ---
 
@@ -265,13 +307,13 @@ pip install reportlab python-docx matplotlib   # reports
 | Pipeline with retraining | `python main.py --train` |
 | Build Karnataka dataset | `python src/ml_models/build_real_dataset.py` |
 | Train models | `python src/ml_models/train_real.py` |
-| Build all-India data + train | `python scripts/build_india_regions_dataset.py --train` (needs `FIRMS_MAP_KEY`, ~1–2 h first time, resumable) |
+| Build all-India data + train | `python scripts/build_india_regions_dataset.py --train` (needs `FIRMS_MAP_KEY`, ~1 to 2 h first time, resumable) |
 | **Launch dashboard** | `streamlit run src/dashboard/app.py` |
 | Scheduler (forever) | `python -m src.scheduler.scheduler` |
 | Scheduler (single cycle, for cron / Task Scheduler) | `python -m src.scheduler.scheduler --once` |
-| Migrate SQLite → MySQL | `python scripts/migrate_sqlite_to_mysql.py` |
+| Migrate SQLite to MySQL | `python scripts/migrate_sqlite_to_mysql.py` |
 | Run tests | `pytest tests/ -v` |
-| Benchmarks | `python scripts/benchmark_phase3.py` · `python scripts/benchmark_ui_offline.py` |
+| Benchmarks | `python scripts/benchmark_phase3.py` and `python scripts/benchmark_ui_offline.py` |
 
 ---
 
@@ -290,13 +332,13 @@ pip install reportlab python-docx matplotlib   # reports
 
 ---
 
-## 🔔 Reports & Emergency Alerts
+## 🚨 Reports & Emergency Alerts
 
 | Capability | Details |
 |---|---|
 | **Report** | PDF / DOCX / printable view, report ID `FFDT-…`, built from the stored run snapshot |
-| **Emergency alert** | Admin only, opt-in: review dialog → recipients (enabled, verified channels) → explicit confirmation |
-| **Safety wording** | What-If alerts always state *"SIMULATION ONLY — hypothetical scenario, not confirmation of an active fire."* |
+| **Emergency alert** | Admin only, opt-in: review dialog, recipients (enabled, verified channels), explicit confirmation |
+| **Safety wording** | What-If alerts always state *"SIMULATION ONLY: hypothetical scenario, not confirmation of an active fire."* |
 | **Audit** | Every attempt logged (Admin → Emergency alerts) |
 | **Statuses** | Provider's own (accepted / queued / failed / not configured / mock), never "delivered" without confirmation |
 
@@ -337,22 +379,6 @@ tests/                              test_pipeline, test_fire_history, test_stora
 
 ---
 
-## ⚠️ Known Limitations
-
-| Limitation | Detail |
-|---|---|
-| Validation scope | Only Karnataka validated by default; other states after running the India build; custom boxes never validated |
-| NDVI | Synthetic placeholder, deliberately not a model input; real NDVI / fuel-moisture rasters not yet ingested |
-| FWI codes | Computed per day from default previous-day values, not full recursive carry-forward (station gaps) |
-| Spread model | Fuel blend and residence times are assumptions, not calibrated for Bandipur; a physically consistent what-if, **not an operational forecast** |
-| Not modelled | Fire suppression, ember spotting, firebreaks; forest tracks, footpaths and seasonal streams not treated as barriers |
-| Perimeter validation | Local spread not yet validated against observed fire perimeters |
-| Vegetation visuals | Procedural, not real individual trees |
-| 3D view | Effects sit on a flat ground plane; DEM used for slope only |
-| Database | Without `DATABASE_URL`, scheduler and dashboard share one local SQLite file; use MySQL for multi-instance deployment |
-
----
-
 ## 🔮 Future Scope
 
 | Idea | Benefit |
@@ -364,10 +390,6 @@ tests/                              test_pipeline, test_fire_history, test_stora
 | Ember spotting | Long-range spread |
 
 ---
-
-## 🚢 Deployment
-
-Deployed on Streamlit Community Cloud: **[add your live URL here]**
 
 ## 📄 License
 
